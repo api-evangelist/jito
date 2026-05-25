@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jito/main/json-schema/jito-bundle-schema.json",
+  "title": "Jito Bundle",
+  "description": "An atomic, ordered list of up to five base-58 or base-64 encoded signed Solana transactions submitted to the Jito Block Engine. If any transaction fails the entire bundle reverts. A SOL tip to a designated tip account is required for inclusion.",
+  "type": "object",
+  "required": ["transactions"],
+  "properties": {
+    "transactions": {
+      "type": "array",
+      "description": "Signed Solana transactions, encoded as base-58 (default) or base-64.",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "type": "string"
+      }
+    },
+    "encoding": {
+      "type": "string",
+      "enum": ["base58", "base64"],
+      "default": "base58"
+    },
+    "tipAccount": {
+      "type": "string",
+      "description": "Designated Jito tip account public key receiving the SOL tip from one of the bundle transactions."
+    },
+    "tipLamports": {
+      "type": "integer",
+      "description": "SOL tip amount in lamports paid to the tip account within the bundle."
+    }
+  }
+}

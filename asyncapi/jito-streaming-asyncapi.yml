@@ -1,0 +1,100 @@
+asyncapi: 3.0.0
+info:
+  title: Jito Streaming Surfaces
+  version: '1.0'
+  description: >-
+    Real-time streaming endpoints exposed by Jito infrastructure: the WebSocket
+    bundle tip stream and the gRPC ShredStream for low-latency Solana shred
+    delivery. These are the canonical out-of-band feeds for searchers, HFT
+    bots, and validators that need sub-slot insight into network state and
+    bundle market pricing.
+servers:
+  tipStream:
+    host: bundles.jito.wtf
+    protocol: wss
+    description: WebSocket stream of recent tip percentiles.
+  shredStream:
+    host: mainnet.block-engine.jito.wtf
+    protocol: grpc
+    description: gRPC ShredStream for low-latency shred delivery to validators and infra operators.
+channels:
+  tipStreamChannel:
+    address: /api/v1/bundles/tip_stream
+    description: Continuous push of landed tip percentile snapshots.
+    messages:
+      tipUpdate:
+        $ref: '#/components/messages/TipFloorUpdate'
+  shredStreamChannel:
+    address: ShredstreamProxy.SubscribeEntries
+    description: Server-streaming gRPC method that emits Solana Entry messages reconstructed from shreds.
+    messages:
+      entry:
+        $ref: '#/components/messages/Entry'
+  bundleResults:
+    address: SearcherService.SubscribeBundleResults
+    description: Server-streaming gRPC delivery of bundle inclusion / rejection results.
+    messages:
+      bundleResult:
+        $ref: '#/components/messages/BundleResult'
+operations:
+  receiveTips:
+    action: receive
+    channel:
+      $ref: '#/channels/tipStreamChannel'
+  receiveShreds:
+    action: receive
+    channel:
+      $ref: '#/channels/shredStreamChannel'
+  receiveBundleResults:
+    action: receive
+    channel:
+      $ref: '#/channels/bundleResults'
+components:
+  messages:
+    TipFloorUpdate:
+      payload:
+        type: object
+        properties:
+          time:
+            type: string
+            format: date-time
+          landed_tips_25th_percentile:
+            type: number
+          landed_tips_50th_percentile:
+            type: number
+          landed_tips_75th_percentile:
+            type: number
+          landed_tips_95th_percentile:
+            type: number
+          landed_tips_99th_percentile:
+            type: number
+          ema_landed_tips_50th_percentile:
+            type: number
+    Entry:
+      payload:
+        type: object
+        description: Solana Entry reconstructed from shreds.
+        properties:
+          slot:
+            type: integer
+          entries:
+            type: string
+            description: Bincode-serialized array of Solana Entries.
+    BundleResult:
+      payload:
+        type: object
+        properties:
+          bundle_id:
+            type: string
+          accepted:
+            type: object
+            description: Set when the bundle was accepted for inclusion.
+          rejected:
+            type: object
+            description: Set with reason when the bundle was rejected.
+          processed:
+            type: object
+            description: Set when the bundle was processed by a validator.
+          finalized:
+            type: object
+            description: Set when the bundle was finalized on chain.

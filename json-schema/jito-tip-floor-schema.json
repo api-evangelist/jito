@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jito/main/json-schema/jito-tip-floor-schema.json",
+  "title": "Jito Bundle Tip Floor",
+  "description": "Snapshot of landed-tips distribution across recent bundles, used by searchers to size the SOL tip on sendBundle.",
+  "type": "object",
+  "properties": {
+    "time": {"type": "string", "format": "date-time"},
+    "landed_tips_25th_percentile": {"type": "number"},
+    "landed_tips_50th_percentile": {"type": "number"},
+    "landed_tips_75th_percentile": {"type": "number"},
+    "landed_tips_95th_percentile": {"type": "number"},
+    "landed_tips_99th_percentile": {"type": "number"},
+    "ema_landed_tips_50th_percentile": {"type": "number"}
+  }
+}

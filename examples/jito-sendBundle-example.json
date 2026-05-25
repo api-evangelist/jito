@@ -1,0 +1,13 @@
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "sendBundle",
+  "params": [
+    [
+      "4VbvoRYXFaXzDBUYfMXP1irhMZ8kPvLTf3GbErkbW...",
+      "5XX...transactionTwoBase58...",
+      "6YY...transactionThreeBase58..."
+    ],
+    {"encoding": "base58"}
+  ]
+}

@@ -1,0 +1,35 @@
+name: Jito Vocabulary
+description: Domain terminology used across Jito Labs and Jito Foundation surfaces — covering MEV, bundles, the Block Engine, ShredStream, JitoSOL, StakeNet, Restaking (Vaults / NCNs / Operators), JTO governance, and the Jito-Solana validator client.
+terms:
+  - term: Jito-Solana
+    definition: Jito Foundation's MEV-enabled fork of the Solana validator client; the most widely run client on mainnet and the substrate that exposes the auction interface to the Block Engine.
+  - term: Block Engine
+    definition: Off-chain auction service operated by Jito Labs that receives bundles and transactions from searchers, runs an auction by tip, and forwards winners to current and upcoming Solana leaders.
+  - term: Bundle
+    definition: Ordered, atomic group of up to five signed Solana transactions submitted to the Block Engine. All or nothing — if any transaction fails the entire bundle reverts.
+  - term: Tip Account
+    definition: One of eight on-chain accounts designated by Jito to receive the SOL tip transfer that prices a bundle into the auction.
+  - term: Searcher
+    definition: Off-chain actor that constructs bundles encoding MEV strategies (arbitrage, liquidations, NFT mints, sniping) and submits them to the Block Engine.
+  - term: Relayer
+    definition: The transaction filtering and forwarding hop that sits in front of a Jito-Solana validator, accepting packets from the Block Engine and the public TPU.
+  - term: ShredStream
+    definition: Jito's gRPC service that pushes Solana shreds (the wire-level pieces of a block) to subscribers for the lowest-latency view of block production.
+  - term: JitoSOL
+    definition: Jito's MEV-aware liquid staking token. SOL deposited into the Jito Stake Pool is delegated to validators selected by StakeNet, and accumulated MEV plus staking rewards accrue into the JitoSOL exchange rate.
+  - term: StakeNet
+    definition: On-chain validator history and scoring system that drives JitoSOL delegation decisions.
+  - term: JTO
+    definition: Governance token of the Jito DAO. Holders direct treasury, fee parameters, and the JitoSOL validator selection policy via Realms.
+  - term: Restaking
+    definition: The Jito Restaking and Vault programs that let SPL tokens be restaked into vaults whose economic security is rented to NCNs.
+  - term: NCN
+    definition: Node Consensus Network — a workload (e.g. oracle, bridge, DA layer) registered against the Restaking program that consumes vault security and pays rewards to operators and stakers.
+  - term: Vault
+    definition: On-chain account holding restaked SPL tokens delegated to operators on behalf of NCNs.
+  - term: Operator
+    definition: Node operator that runs NCN workloads and receives vault delegation.
+  - term: BAM
+    definition: Block Assembly Marketplace — the next-generation auction interface Jito Labs is rolling out for block-level orderflow.
+  - term: MEV
+    definition: Maximum Extractable Value — value captured by ordering, including, or censoring transactions inside a block.

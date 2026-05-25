@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/structure",
+  "title": "Jito Bundle Structure",
+  "description": "JSON Structure representation of an atomic Jito bundle with required transactions array (max 5), encoding choice, tip account, and tip amount.",
+  "type": "object",
+  "properties": {
+    "transactions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {"type": "string"}
+    },
+    "encoding": {"type": "string", "enum": ["base58", "base64"]},
+    "tipAccount": {"type": "string"},
+    "tipLamports": {"type": "integer"}
+  },
+  "required": ["transactions"]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jito/main/json-schema/jito-bundle-status-schema.json",
+  "title": "Jito Bundle Status",
+  "description": "Confirmation state of a previously submitted bundle, returned by getBundleStatuses.",
+  "type": "object",
+  "properties": {
+    "bundle_id": {
+      "type": "string",
+      "description": "SHA-256 hash of the concatenated transaction signatures that uniquely identifies the bundle."
+    },
+    "transactions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Transaction signatures contained in the bundle."
+    },
+    "slot": {
+      "type": "integer",
+      "description": "Slot in which the bundle was processed."
+    },
+    "confirmationStatus": {
+      "type": "string",
+      "enum": ["processed", "confirmed", "finalized"]
+    },
+    "err": {
+      "type": ["object", "null"],
+      "description": "Error object if the bundle failed."
+    }
+  }
+}

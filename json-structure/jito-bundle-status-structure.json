@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-structure.org/structure",
+  "title": "Jito Bundle Status Structure",
+  "type": "object",
+  "properties": {
+    "bundle_id": {"type": "string"},
+    "transactions": {"type": "array", "items": {"type": "string"}},
+    "slot": {"type": "integer"},
+    "confirmationStatus": {"type": "string", "enum": ["processed", "confirmed", "finalized"]},
+    "err": {"type": ["object", "null"]}
+  }
+}

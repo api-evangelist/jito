@@ -1,0 +1,41 @@
+name: Jito Rate Limits
+description: >-
+  Rate limit policy for Jito's Block Engine JSON-RPC, transactions proxy, tip
+  floor REST endpoint, and ShredStream gRPC. The Block Engine enforces shared
+  per-IP and per-UUID limits across regional endpoints; higher limits are
+  available by requesting a UUID from Jito Labs. Limits change without notice
+  — operators should treat published numbers as guidance and monitor 429s.
+specification: https://apicommons.org/specifications/rate-limits/0.1
+policies:
+  - id: block-engine-default
+    description: Default unauthenticated per-IP shared limit across Block Engine endpoints.
+    limits:
+      - metric: requests-per-second
+        value: 5
+        scope: per-ip
+  - id: block-engine-uuid
+    description: Raised per-UUID limit available on request from Jito Labs.
+    limits:
+      - metric: requests-per-second
+        value: variable
+        scope: per-uuid
+        description: Negotiated per partner; submit a request via Jito support.
+  - id: sendBundle-bundle-size
+    description: Per-bundle structural limit on sendBundle.
+    limits:
+      - metric: transactions-per-bundle
+        value: 5
+        scope: per-request
+  - id: getBundleStatuses-batch
+    description: Maximum bundle IDs per getBundleStatuses / getInflightBundleStatuses call.
+    limits:
+      - metric: ids-per-request
+        value: 5
+        scope: per-request
+  - id: tip-floor
+    description: Public unauthenticated polling endpoint for tip pricing; aggressively cache.
+    limits:
+      - metric: requests-per-second
+        value: 1
+        scope: per-ip
+        description: Suggested polling cadence. Use the tip_stream WebSocket for live updates.

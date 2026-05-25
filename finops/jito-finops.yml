@@ -1,0 +1,33 @@
+name: Jito FinOps
+description: >-
+  FinOps mapping for Jito services. There is no Jito-platform invoice — the
+  meaningful cost lines are the SOL tips a searcher pays per bundle and the
+  stake pool fee accrued against JitoSOL rewards. Both are observable on chain
+  rather than via a billing API.
+specification: https://focus.finops.org/
+billingModel:
+  type: usage-based-onchain
+  invoicedBy: none
+  costSources:
+    - id: bundle-tips
+      description: Per-bundle SOL tip transferred to a designated tip account inside the bundle.
+      unit: SOL
+      observability: on-chain (transaction history of tip account)
+    - id: priority-fees
+      description: Standard Solana priority fees paid via the underlying validator (not Jito-specific).
+      unit: SOL
+      observability: on-chain
+    - id: jitosol-stake-pool-fee
+      description: Stake pool fee taken on staking and MEV rewards in the JitoSOL stake pool.
+      unit: percentage
+      observability: on-chain (stake pool account)
+attribution:
+  recommended:
+    - bot-id
+    - strategy
+    - target-program
+    - leader-region
+  notes: >-
+    Jito does not expose a tenant-level usage report. Operators should tag tips
+    in their own bot infrastructure (e.g. via a metadata account or off-chain
+    log) and reconcile against on-chain transfers to the tip accounts.

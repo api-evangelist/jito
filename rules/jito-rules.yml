@@ -1,0 +1,41 @@
+extends:
+  - spectral:oas
+rules:
+  jito-info-contact:
+    description: Jito specs must declare a contact pointing to jito.network.
+    given: "$.info.contact.url"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "jito"
+  jito-operation-summary-title-case:
+    description: Operation summaries must use Title Case.
+    given: "$.paths.*.*.summary"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9 ]+$"
+  jito-servers-require-block-engine:
+    description: At least one server must point at mainnet.block-engine.jito.wtf.
+    given: "$.servers"
+    severity: error
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            type: object
+            properties:
+              url:
+                pattern: "block-engine.jito.wtf"
+            required: ["url"]
+  jito-bundle-max-five:
+    description: Any schema describing bundle transactions must cap at 5 items.
+    given: "$..properties.transactions[?(@.type == 'array')]"
+    severity: warn
+    then:
+      field: maxItems
+      function: truthy

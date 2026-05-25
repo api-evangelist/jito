@@ -1,0 +1,25 @@
+name: jito-bundle
+description: Submit and track atomic Solana transaction bundles through the Jito Block Engine.
+provider: jito
+api: block-engine
+operations:
+  - id: sendBundle
+    method: POST
+    path: /api/v1/bundles
+    description: Submit a JSON-RPC sendBundle request with up to five base-58 signed transactions.
+  - id: getBundleStatuses
+    method: POST
+    path: /api/v1/bundles
+    description: Look up confirmation state of previously submitted bundles by ID.
+  - id: getInflightBundleStatuses
+    method: POST
+    path: /api/v1/bundles
+    description: Check inflight bundle state within the last 5 minutes.
+  - id: getTipAccounts
+    method: POST
+    path: /api/v1/bundles
+    description: List the eight designated SOL tip accounts.
+  - id: getRandomTipAccount
+    method: POST
+    path: /api/v1/bundles
+    description: Get a single randomly selected tip account.

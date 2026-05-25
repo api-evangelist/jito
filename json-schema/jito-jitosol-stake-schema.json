@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jito/main/json-schema/jito-jitosol-stake-schema.json",
+  "title": "JitoSOL Stake Position",
+  "description": "Representation of a JitoSOL liquid staking position. JitoSOL is Solana's largest MEV-aware liquid staking token, backed by the Jito Stake Pool SPL program.",
+  "type": "object",
+  "properties": {
+    "stakePoolAddress": {
+      "type": "string",
+      "description": "On-chain address of the Jito Stake Pool program."
+    },
+    "jitoSolMint": {
+      "type": "string",
+      "description": "Mint address of the JitoSOL token."
+    },
+    "stakerWallet": {
+      "type": "string",
+      "description": "Wallet address of the staker."
+    },
+    "lamportsDeposited": {
+      "type": "integer"
+    },
+    "jitoSolReceived": {
+      "type": "integer"
+    },
+    "currentExchangeRate": {
+      "type": "number",
+      "description": "JitoSOL → SOL exchange rate at the snapshot time."
+    },
+    "validatorSet": {
+      "type": "array",
+      "description": "Validators that the stake pool delegates to, scored by StakeNet.",
+      "items": {"type": "string"}
+    }
+  }
+}

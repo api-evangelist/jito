@@ -1,0 +1,20 @@
+name: bundle-submission
+description: >-
+  End-to-end Naftiko capability for submitting an atomic transaction bundle to
+  the Jito Block Engine: discover a tip account, attach a SOL tip transfer to
+  one transaction, sign and submit the bundle, then poll inflight and final
+  bundle status.
+extends:
+  - shared/jito-bundle.yaml
+workflow:
+  - step: get-tip-account
+    operation: getRandomTipAccount
+  - step: send-bundle
+    operation: sendBundle
+    dependsOn: get-tip-account
+  - step: monitor-inflight
+    operation: getInflightBundleStatuses
+    dependsOn: send-bundle
+  - step: confirm-final
+    operation: getBundleStatuses
+    dependsOn: monitor-inflight

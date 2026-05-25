@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/jito/main/json-schema/jito-ncn-schema.json",
+  "title": "Jito NCN (Node Consensus Network)",
+  "description": "An NCN — Node Consensus Network — is a workload registered with the Jito Restaking program that consumes economic security from Jito Vaults and pays rewards to operators and stakers.",
+  "type": "object",
+  "properties": {
+    "ncnAddress": {"type": "string"},
+    "admin": {"type": "string"},
+    "operatorWhitelist": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "vaultWhitelist": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "supportedTokens": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Restaked SPL tokens accepted as security."
+    },
+    "slashingProgram": {
+      "type": "string",
+      "description": "Program responsible for slashing on misbehavior."
+    }
+  }
+}

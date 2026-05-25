@@ -1,0 +1,11 @@
+[
+  {
+    "time": "2026-05-24T12:00:00Z",
+    "landed_tips_25th_percentile": 0.000005,
+    "landed_tips_50th_percentile": 0.00001,
+    "landed_tips_75th_percentile": 0.00005,
+    "landed_tips_95th_percentile": 0.0005,
+    "landed_tips_99th_percentile": 0.005,
+    "ema_landed_tips_50th_percentile": 0.000012
+  }
+]

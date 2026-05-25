@@ -1,0 +1,18 @@
+name: jitosol-staking
+description: >-
+  Stake SOL into the Jito Stake Pool to mint JitoSOL, an MEV-aware liquid
+  staking token whose value accrues from staking rewards plus the validator
+  set's share of MEV captured by the Block Engine. Includes on-chain stake /
+  unstake operations and exchange rate queries.
+provider: jito
+api: jitosol-stake-pool
+program: SPL Stake Pool
+operations:
+  - id: deposit-sol
+    description: Deposit SOL into the Jito Stake Pool in exchange for JitoSOL.
+  - id: withdraw-sol
+    description: Withdraw SOL from the Jito Stake Pool by burning JitoSOL.
+  - id: deposit-stake
+    description: Convert an existing SOL stake account into JitoSOL.
+  - id: get-exchange-rate
+    description: Read the current JitoSOL → SOL exchange rate from the stake pool account.

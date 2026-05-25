@@ -1,0 +1,42 @@
+name: Jito Plans And Pricing
+description: >-
+  Commercial surface for Jito Labs services. The Block Engine JSON-RPC, tip
+  floor REST, tip stream WebSocket, and ShredStream gRPC are free to query —
+  the cost surface is the SOL tip a searcher attaches to a bundle, which is
+  set by market demand and observed on the tip floor. JitoSOL charges a stake
+  pool fee on rewards; restaking does not yet charge a protocol fee.
+specification: https://apicommons.org/specifications/plans/0.1
+plans:
+  - id: free
+    name: Free
+    description: Open developer access to the Block Engine JSON-RPC, the tip floor REST endpoint, the tip stream WebSocket, and ShredStream gRPC. There is no Jito-side platform fee.
+    entries:
+      - geo: Global
+        unit: 1
+        label: Request
+        price: 0
+        metric: request
+        timeFrame: usage
+        description: API access is free of platform charges.
+  - id: bundle-tip
+    name: Bundle Tip
+    description: Per-bundle SOL tip transferred to a designated tip account. This is the cost of competitive inclusion — not a Jito subscription fee — and the going rate is observable on the tip floor.
+    entries:
+      - geo: Global
+        unit: 1
+        label: Tip
+        price: market
+        metric: SOL
+        timeFrame: per-bundle
+        description: Market-priced SOL tip per submitted bundle.
+  - id: jitosol-stake-pool-fee
+    name: JitoSOL Stake Pool Fee
+    description: Stake pool fee taken on staking and MEV rewards distributed to JitoSOL. Parameters are governed on chain by JTO holders.
+    entries:
+      - geo: Global
+        unit: 1
+        label: Rewards
+        price: variable
+        metric: percentage
+        timeFrame: per-epoch
+        description: Stake pool fee assessed on epoch rewards.
