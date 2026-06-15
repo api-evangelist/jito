@@ -1,0 +1,108 @@
+{
+  "item": [
+    {
+      "id": "b1b03ba7-03b1-4168-92dc-e2e8b4fb6496",
+      "name": "Tips",
+      "description": {
+        "content": "Bundle tip pricing data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7af878c7-38b9-437d-96bd-0da3e54ba415",
+          "name": "Get Bundle Tip Floor Statistics",
+          "request": {
+            "name": "Get Bundle Tip Floor Statistics",
+            "description": {
+              "content": "Returns the most recent landed-tips distribution across active searchers, including 25th/50th/75th/95th/99th percentile tip values in SOL. Useful for sizing the tip on `sendBundle` so a bundle has a statistically reasonable chance of inclusion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bundles",
+                "tip_floor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bbcf5a86-63d3-41c4-9bbe-e0b5d7954a7e",
+              "name": "Tip floor snapshot.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bundles",
+                    "tip_floor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"time\": \"1972-05-20T19:22:31.358Z\",\n    \"landed_tips_25th_percentile\": 8358.76241721295,\n    \"landed_tips_50th_percentile\": 6120.4550525321065,\n    \"landed_tips_75th_percentile\": 5813.2455790650365,\n    \"landed_tips_95th_percentile\": 3768.547721778044,\n    \"landed_tips_99th_percentile\": 8659.198194466211,\n    \"ema_landed_tips_50th_percentile\": 1516.0823813603697\n  },\n  {\n    \"time\": \"1958-04-03T03:05:54.620Z\",\n    \"landed_tips_25th_percentile\": 3890.470121283384,\n    \"landed_tips_50th_percentile\": 5006.384622398339,\n    \"landed_tips_75th_percentile\": 8178.761744214973,\n    \"landed_tips_95th_percentile\": 2755.7005161867633,\n    \"landed_tips_99th_percentile\": 9274.47815213374,\n    \"ema_landed_tips_50th_percentile\": 4260.806829797917\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://bundles.jito.wtf",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "82bcfc2e-725d-4c01-9c30-692918c10b93",
+    "name": "Jito Bundles Tip Floor API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST endpoint that returns recent tip pricing data used by searchers to size the SOL tip attached to a bundle. Pairs with the WebSocket tip stream (`wss://bundles.jito.wtf/api/v1/bundles/tip_stream`) for real-time tip percentile updates.\n\nContact Support:\n Name: Jito Labs",
+      "type": "text/plain"
+    }
+  }
+}

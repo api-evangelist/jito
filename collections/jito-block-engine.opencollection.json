@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jito Block Engine JSON-RPC API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bundles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Bundle Or Query Bundle State",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.block-engine.jito.wtf/api/v1/bundles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "JSON-RPC 2.0 endpoint that accepts the `sendBundle`, `getBundleStatuses`, `getInflightBundleStatuses`, `getTipAccounts`, and `getRandomTipAccount` methods. The `method` field in the request body selects which operation is invoked."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Transaction Through Block Engine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.block-engine.jito.wtf/api/v1/transactions",
+            "params": [
+              {
+                "name": "bundleOnly",
+                "value": "",
+                "type": "query",
+                "description": "When true, the transaction is treated as a single-transaction bundle."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "JSON-RPC 2.0 endpoint exposing the `sendTransaction` method. Acts as a direct proxy to Solana's `sendTransaction`, but routes the transaction through the Block Engine to the next leader for inclusion. Optional `bundleOnly=true` query parameter forces the transaction to be wrapped in a single-tx bundle so it is processed under bundle semantics."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
