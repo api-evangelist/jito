@@ -245,6 +245,8 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: AgenticAccess
+    url: agentic-access/jito-agentic-access.yml
   - type: DomainSecurity
     url: security/jito-domain-security.yml
   - url: https://www.jito.network
