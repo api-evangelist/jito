@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: Jito Block Engine JSON-RPC Bundles Tips API
+  version: '1.0'
+  description: JSON-RPC API for the Jito Block Engine. The Block Engine accepts bundles and transactions from searchers, bots, and dApps and forwards them to Jito-Solana leader validators for atomic block inclusion. Bundles are ordered, atomic groups of up to five Solana transactions that must execute together — if any one fails the entire bundle reverts. A SOL tip to a designated tip account is required for bundles to be considered by leaders.
+  contact:
+    name: Jito Labs
+    url: https://www.jito.network
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-mev: true
+  x-network: solana
+servers:
+- url: https://mainnet.block-engine.jito.wtf
+  description: Mainnet global
+- url: https://amsterdam.mainnet.block-engine.jito.wtf
+  description: Mainnet Amsterdam
+- url: https://dublin.mainnet.block-engine.jito.wtf
+  description: Mainnet Dublin
+- url: https://frankfurt.mainnet.block-engine.jito.wtf
+  description: Mainnet Frankfurt
+- url: https://london.mainnet.block-engine.jito.wtf
+  description: Mainnet London
+- url: https://ny.mainnet.block-engine.jito.wtf
+  description: Mainnet New York
+- url: https://slc.mainnet.block-engine.jito.wtf
+  description: Mainnet Salt Lake City
+- url: https://singapore.mainnet.block-engine.jito.wtf
+  description: Mainnet Singapore
+- url: https://tokyo.mainnet.block-engine.jito.wtf
+  description: Mainnet Tokyo
+- url: https://testnet.block-engine.jito.wtf
+  description: Testnet global
+- url: https://dallas.testnet.block-engine.jito.wtf
+  description: Testnet Dallas
+- url: https://ny.testnet.block-engine.jito.wtf
+  description: Testnet New York
+tags:
+- name: Tips
+  description: Bundle tip pricing data.
+paths:
+  /api/v1/bundles/tip_floor:
+    get:
+      summary: Get Bundle Tip Floor Statistics
+      operationId: getTipFloor
+      tags:
+      - Tips
+      description: Returns the most recent landed-tips distribution across active searchers, including 25th/50th/75th/95th/99th percentile tip values in SOL. Useful for sizing the tip on `sendBundle` so a bundle has a statistically reasonable chance of inclusion.
+      responses:
+        '200':
+          description: Tip floor snapshot.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipFloor'
+components:
+  schemas:
+    TipFloor:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        landed_tips_25th_percentile:
+          type: number
+        landed_tips_50th_percentile:
+          type: number
+        landed_tips_75th_percentile:
+          type: number
+        landed_tips_95th_percentile:
+          type: number
+        landed_tips_99th_percentile:
+          type: number
+        ema_landed_tips_50th_percentile:
+          type: number
