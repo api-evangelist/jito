@@ -1,64 +1,6 @@
 aid: jito
 url: https://raw.githubusercontent.com/api-evangelist/jito/refs/heads/main/apis.yml
 apis:
-  - aid: jito:jito-block-engine
-    name: Jito Block Engine JSON-RPC API
-    tags:
-      - Solana
-      - MEV
-      - Bundles
-      - Block Engine
-    humanURL: https://docs.jito.wtf/lowlatencytxnsend
-    baseURL: https://mainnet.block-engine.jito.wtf/api/v1/bundles
-    properties:
-      - url: https://docs.jito.wtf/lowlatencytxnsend
-        type: Documentation
-      - url: https://github.com/jito-labs/mev-protos/blob/master/json_rpc/http.md
-        type: APIReference
-      - url: openapi/jito-block-engine-openapi.yml
-        type: OpenAPI
-      - url: json-schema/jito-bundle-schema.json
-        type: JSONSchema
-      - url: json-schema/jito-bundle-status-schema.json
-        type: JSONSchema
-      - url: json-structure/jito-bundle-structure.json
-        type: JSONStructure
-      - url: json-structure/jito-bundle-status-structure.json
-        type: JSONStructure
-      - url: examples/jito-sendBundle-example.json
-        type: Examples
-      - url: examples/jito-sendBundle-response-example.json
-        type: Examples
-      - url: examples/jito-getBundleStatuses-example.json
-        type: Examples
-      - url: examples/jito-getTipAccounts-example.json
-        type: Examples
-    description: >-
-      JSON-RPC API for submitting atomic bundles of up to five Solana transactions to the Jito Block Engine via
-      sendBundle, plus getBundleStatuses, getInflightBundleStatuses, getTipAccounts, getRandomTipAccount, and a
-      sendTransaction proxy. Endpoints are exposed from regional Block Engine clusters in Amsterdam, Dublin, Frankfurt,
-      London, New York, Salt Lake City, Singapore, Tokyo, and global mainnet and testnet front-doors.
-  - aid: jito:jito-bundles-tip-floor
-    name: Jito Bundles Tip Floor API
-    tags:
-      - Solana
-      - MEV
-      - Tips
-      - Pricing
-    humanURL: https://bundles.jito.wtf/api/v1/bundles/tip_floor
-    baseURL: https://bundles.jito.wtf
-    properties:
-      - url: https://docs.jito.wtf/lowlatencytxnsend
-        type: Documentation
-      - url: openapi/jito-bundles-tip-floor-openapi.yml
-        type: OpenAPI
-      - url: json-schema/jito-tip-floor-schema.json
-        type: JSONSchema
-      - url: examples/jito-tip-floor-example.json
-        type: Examples
-    description: >-
-      Public REST endpoint exposing the recent tip floor — landed-tips percentiles (25th/50th/75th/95th/99th plus EMA50)
-      — used by searchers to size the SOL tip on sendBundle. Pairs with the tip_stream WebSocket for continuous updates.
   - aid: jito:jito-streaming
     name: Jito Streaming Surfaces
     tags:
@@ -77,9 +19,9 @@ apis:
       - url: asyncapi/jito-streaming-asyncapi.yml
         type: AsyncAPI
     description: >-
-      Real-time streaming surfaces from Jito infrastructure — the wss tip_stream for continuous bundle-tip percentile
-      updates, the ShredstreamProxy SubscribeEntries gRPC method for sub-slot Solana shred delivery, and the
-      SearcherService SubscribeBundleResults gRPC stream of bundle inclusion and rejection events.
+      Real-time streaming surfaces from Jito infrastructure — the wss tip_stream for continuous bundle-tip
+      percentile updates, the ShredstreamProxy SubscribeEntries gRPC method for sub-slot Solana shred delivery,
+      and the SearcherService SubscribeBundleResults gRPC stream of bundle inclusion and rejection events.
   - aid: jito:jito-searcher-grpc
     name: Jito Searcher gRPC Service
     tags:
@@ -97,9 +39,9 @@ apis:
         type: CodeExamples
     description: >-
       gRPC SearcherService exposing SubscribeBundleResults, SendBundle, GetNextScheduledLeader, GetConnectedLeaders,
-      GetConnectedLeadersRegioned, GetTipAccounts, and GetRegions. Authenticated via the AuthService challenge +
-      token-refresh flow. The native interface used by Jito's official Rust, TypeScript, Python, and Go searcher
-      clients.
+      GetConnectedLeadersRegioned, GetTipAccounts, and GetRegions. Authenticated via the AuthService challenge
+      + token-refresh flow. The native interface used by Jito's official Rust, TypeScript, Python, and Go
+      searcher clients.
   - aid: jito:jito-block-engine-validator-grpc
     name: Jito Block Engine Validator gRPC
     tags:
@@ -116,9 +58,9 @@ apis:
       - url: https://github.com/jito-foundation/jito-relayer
         type: Repository
     description: >-
-      gRPC interface between Jito-Solana validators / relayers and the Block Engine — BlockEngineValidator with
-      SubscribePackets, SubscribeBundles, GetBlockBuilderFeeInfo, GetBlockEngineEndpoints, and BlockEngineRelayer with
-      SubscribeAccountsOfInterest, SubscribeProgramsOfInterest, and StartExpiringPacketStream.
+      gRPC interface between Jito-Solana validators / relayers and the Block Engine — BlockEngineValidator
+      with SubscribePackets, SubscribeBundles, GetBlockBuilderFeeInfo, GetBlockEngineEndpoints, and BlockEngineRelayer
+      with SubscribeAccountsOfInterest, SubscribeProgramsOfInterest, and StartExpiringPacketStream.
   - aid: jito:jito-relayer-grpc
     name: Jito Relayer gRPC
     tags:
@@ -133,8 +75,8 @@ apis:
       - url: https://github.com/jito-labs/mev-protos/blob/master/relayer.proto
         type: APIReference
     description: >-
-      Relayer gRPC service that sits in front of a Jito-Solana validator, exposing GetTpuConfigs and SubscribePackets so
-      the validator can receive deduplicated packets from the Block Engine and the public TPU.
+      Relayer gRPC service that sits in front of a Jito-Solana validator, exposing GetTpuConfigs and SubscribePackets
+      so the validator can receive deduplicated packets from the Block Engine and the public TPU.
   - aid: jito:jitosol-stake-pool
     name: JitoSOL Stake Pool
     tags:
@@ -155,9 +97,10 @@ apis:
       - url: json-schema/jito-jitosol-stake-schema.json
         type: JSONSchema
     description: >-
-      JitoSOL — Solana's MEV-aware liquid staking token, backed by an instance of the SPL Stake Pool program. Deposit
-      SOL or an existing stake account to receive JitoSOL whose exchange rate accrues both staking rewards and the
-      validator set's share of MEV captured by the Block Engine. StakeNet drives validator selection on chain.
+      JitoSOL — Solana's MEV-aware liquid staking token, backed by an instance of the SPL Stake Pool program.
+      Deposit SOL or an existing stake account to receive JitoSOL whose exchange rate accrues both staking
+      rewards and the validator set's share of MEV captured by the Block Engine. StakeNet drives validator
+      selection on chain.
   - aid: jito:jito-restaking
     name: Jito Restaking And Vaults
     tags:
@@ -180,28 +123,9 @@ apis:
       - url: json-schema/jito-ncn-schema.json
         type: JSONSchema
     description: >-
-      Jito Restaking — the on-chain program suite (Restaking + Vault) that lets SPL tokens be restaked into Vaults whose
-      security is rented to NCNs (Node Consensus Networks). Includes the tip router, the rewards NCN that distributes
-      payment to other NCNs, an NCN template, and a BLS NCN reference implementation.
-  - aid: jito:jito-foundation-governance
-    name: Jito Foundation Governance
-    tags:
-      - Solana
-      - Governance
-      - JTO
-      - DAO
-    humanURL: https://gov.jito.network
-    properties:
-      - url: https://gov.jito.network
-        type: Portal
-      - url: https://github.com/jito-foundation/governance-ui
-        type: Repository
-      - url: https://github.com/jito-foundation/distributor
-        type: Repository
-    description: >-
-      Jito DAO governance — JTO token holders direct treasury, fee parameters, and the JitoSOL validator selection
-      policy through Realms. Includes the Jito Realms governance UI fork and the merkle-based token distributor used for
-      airdrops and reward distribution.
+      Jito Restaking — the on-chain program suite (Restaking + Vault) that lets SPL tokens be restaked into
+      Vaults whose security is rented to NCNs (Node Consensus Networks). Includes the tip router, the rewards
+      NCN that distributes payment to other NCNs, an NCN template, and a BLS NCN reference implementation.
   - aid: jito:jito-solana
     name: Jito-Solana Validator Client
     tags:
@@ -222,9 +146,112 @@ apis:
       - url: https://github.com/jito-foundation/solana-accountsdb-connector
         type: Repository
     description: >-
-      Jito-Solana — the Jito Foundation MEV-enabled fork of the Solana validator client. Adds the Block Engine / Relayer
-      integration that makes the bundle auction possible at the validator layer. Ships alongside the Jito programs, the
-      Geyser gRPC plugin for account streaming, the Jito Bell notification system, and an accountsdb connector.
+      Jito-Solana — the Jito Foundation MEV-enabled fork of the Solana validator client. Adds the Block
+      Engine / Relayer integration that makes the bundle auction possible at the validator layer. Ships
+      alongside the Jito programs, the Geyser gRPC plugin for account streaming, the Jito Bell notification
+      system, and an accountsdb connector.
+  - aid: jito:jito-bundles-api
+    name: Jito Labs Bundles API
+    description: Submit and inspect atomic Solana transaction bundles.
+    humanURL: https://docs.jito.wtf/lowlatencytxnsend
+    baseURL: https://mainnet.block-engine.jito.wtf/api/v1/bundles
+    tags:
+      - Bundles
+    properties:
+      - type: OpenAPI
+        url: openapi/jito-bundles-api-openapi.yml
+      - type: Documentation
+        url: https://docs.jito.wtf/lowlatencytxnsend
+      - type: APIReference
+        url: https://github.com/jito-labs/mev-protos/blob/master/json_rpc/http.md
+      - type: JSONSchema
+        url: json-schema/jito-bundle-schema.json
+      - type: JSONSchema
+        url: json-schema/jito-bundle-status-schema.json
+      - type: JSONStructure
+        url: json-structure/jito-bundle-structure.json
+      - type: JSONStructure
+        url: json-structure/jito-bundle-status-structure.json
+      - type: Examples
+        url: examples/jito-sendBundle-example.json
+      - type: Examples
+        url: examples/jito-sendBundle-response-example.json
+      - type: Examples
+        url: examples/jito-getBundleStatuses-example.json
+      - type: Examples
+        url: examples/jito-getTipAccounts-example.json
+      - type: JSONSchema
+        url: json-schema/jito-tip-floor-schema.json
+      - type: Examples
+        url: examples/jito-tip-floor-example.json
+  - aid: jito:jito-tips-api
+    name: Jito Labs Tips API
+    description: Bundle tip pricing data.
+    humanURL: https://docs.jito.wtf/lowlatencytxnsend
+    baseURL: https://mainnet.block-engine.jito.wtf/api/v1/bundles
+    tags:
+      - Tips
+    properties:
+      - type: OpenAPI
+        url: openapi/jito-tips-api-openapi.yml
+      - type: Documentation
+        url: https://docs.jito.wtf/lowlatencytxnsend
+      - type: APIReference
+        url: https://github.com/jito-labs/mev-protos/blob/master/json_rpc/http.md
+      - type: JSONSchema
+        url: json-schema/jito-bundle-schema.json
+      - type: JSONSchema
+        url: json-schema/jito-bundle-status-schema.json
+      - type: JSONStructure
+        url: json-structure/jito-bundle-structure.json
+      - type: JSONStructure
+        url: json-structure/jito-bundle-status-structure.json
+      - type: Examples
+        url: examples/jito-sendBundle-example.json
+      - type: Examples
+        url: examples/jito-sendBundle-response-example.json
+      - type: Examples
+        url: examples/jito-getBundleStatuses-example.json
+      - type: Examples
+        url: examples/jito-getTipAccounts-example.json
+      - type: JSONSchema
+        url: json-schema/jito-tip-floor-schema.json
+      - type: Examples
+        url: examples/jito-tip-floor-example.json
+  - aid: jito:jito-transactions-api
+    name: Jito Labs Transactions API
+    description: Direct sendTransaction proxy to validator leaders.
+    humanURL: https://docs.jito.wtf/lowlatencytxnsend
+    baseURL: https://mainnet.block-engine.jito.wtf/api/v1/bundles
+    tags:
+      - Transactions
+    properties:
+      - type: OpenAPI
+        url: openapi/jito-transactions-api-openapi.yml
+      - type: Documentation
+        url: https://docs.jito.wtf/lowlatencytxnsend
+      - type: APIReference
+        url: https://github.com/jito-labs/mev-protos/blob/master/json_rpc/http.md
+      - type: JSONSchema
+        url: json-schema/jito-bundle-schema.json
+      - type: JSONSchema
+        url: json-schema/jito-bundle-status-schema.json
+      - type: JSONStructure
+        url: json-structure/jito-bundle-structure.json
+      - type: JSONStructure
+        url: json-structure/jito-bundle-status-structure.json
+      - type: Examples
+        url: examples/jito-sendBundle-example.json
+      - type: Examples
+        url: examples/jito-sendBundle-response-example.json
+      - type: Examples
+        url: examples/jito-getBundleStatuses-example.json
+      - type: Examples
+        url: examples/jito-getTipAccounts-example.json
+      - type: JSONSchema
+        url: json-schema/jito-tip-floor-schema.json
+      - type: Examples
+        url: examples/jito-tip-floor-example.json
 name: Jito Labs
 tags:
   - Solana
@@ -242,7 +269,19 @@ tags:
   - Crypto
   - DeFi
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+    - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/jito.png
 access: 3rd-Party
 common:
   - type: AgenticAccess
@@ -441,8 +480,10 @@ common:
         description: Run new Node Consensus Network workloads secured by restaked SPL collateral.
       - name: dApps And Bots
         description: Consume ShredStream and the Block Engine for low-latency Solana access.
+  - type: About
+    url: https://gov.jito.network
 created: '2026-05-24T00:00:00.000Z'
-modified: '2026-05-24'
+modified: '2026-07-25'
 position: Producing
 description: >-
   Jito Labs is the Solana MEV infrastructure company behind Jito-Solana, the MEV-enabled validator client that runs on

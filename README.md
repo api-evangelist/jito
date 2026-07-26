@@ -230,11 +230,6 @@ Jito Restaking — the on-chain program suite (Restaking + Vault) that lets SPL 
 - [Postman Collection](collections/jito-bundles-tip-floor.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
 - [Open Collection](collections/jito-bundles-tip-floor.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-### Jito Foundation Governance
-
-Jito DAO governance — JTO token holders direct treasury, fee parameters, and the JitoSOL validator selection policy through Realms. Includes the Jito Realms governance UI fork and the merkle-based token distributor used for airdrops and reward distribution.
-
-- **Human URL:** [https://gov.jito.network](https://gov.jito.network)
 
 #### Tags
 
