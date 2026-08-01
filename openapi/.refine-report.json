@@ -1,0 +1,18 @@
+{
+  "provider": "jito",
+  "sources": [
+    "jito-bundles-api-openapi.yml",
+    "jito-tips-api-openapi.yml",
+    "jito-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "jito-bundles-api-openapi.yml",
+    "jito-tips-api-openapi.yml",
+    "jito-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

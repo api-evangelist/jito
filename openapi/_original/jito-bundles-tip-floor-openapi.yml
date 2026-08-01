@@ -1,0 +1,62 @@
+openapi: 3.1.0
+info:
+  title: Jito Bundles Tip Floor API
+  version: '1.0'
+  description: >-
+    Public REST endpoint that returns recent tip pricing data used by searchers
+    to size the SOL tip attached to a bundle. Pairs with the WebSocket tip
+    stream (`wss://bundles.jito.wtf/api/v1/bundles/tip_stream`) for real-time
+    tip percentile updates.
+  contact:
+    name: Jito Labs
+    url: https://www.jito.network
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: https://bundles.jito.wtf
+    description: Tip pricing service.
+tags:
+  - name: Tips
+    description: Bundle tip pricing data.
+paths:
+  /api/v1/bundles/tip_floor:
+    get:
+      summary: Get Bundle Tip Floor Statistics
+      operationId: getTipFloor
+      tags:
+        - Tips
+      description: >-
+        Returns the most recent landed-tips distribution across active
+        searchers, including 25th/50th/75th/95th/99th percentile tip values in
+        SOL. Useful for sizing the tip on `sendBundle` so a bundle has a
+        statistically reasonable chance of inclusion.
+      responses:
+        '200':
+          description: Tip floor snapshot.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TipFloor'
+components:
+  schemas:
+    TipFloor:
+      type: object
+      properties:
+        time:
+          type: string
+          format: date-time
+        landed_tips_25th_percentile:
+          type: number
+        landed_tips_50th_percentile:
+          type: number
+        landed_tips_75th_percentile:
+          type: number
+        landed_tips_95th_percentile:
+          type: number
+        landed_tips_99th_percentile:
+          type: number
+        ema_landed_tips_50th_percentile:
+          type: number
