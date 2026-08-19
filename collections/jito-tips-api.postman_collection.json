@@ -1,0 +1,108 @@
+{
+  "item": [
+    {
+      "id": "9fb22c6c-7a17-4ba5-9754-b4cf3863cdcd",
+      "name": "Tips",
+      "description": {
+        "content": "Bundle tip pricing data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b9147936-70f7-4ff5-9430-fb041ea474f4",
+          "name": "Get Bundle Tip Floor Statistics",
+          "request": {
+            "name": "Get Bundle Tip Floor Statistics",
+            "description": {
+              "content": "Returns the most recent landed-tips distribution across active searchers, including 25th/50th/75th/95th/99th percentile tip values in SOL. Useful for sizing the tip on `sendBundle` so a bundle has a statistically reasonable chance of inclusion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bundles",
+                "tip_floor"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b8edb6c-2a9a-4fcb-b707-7009216c5a07",
+              "name": "Tip floor snapshot.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bundles",
+                    "tip_floor"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"time\": \"1996-09-29T14:03:56.963Z\",\n    \"landed_tips_25th_percentile\": 7556.9139899921665,\n    \"landed_tips_50th_percentile\": 3674.6774754465914,\n    \"landed_tips_75th_percentile\": 9027.772886847173,\n    \"landed_tips_95th_percentile\": 6243.330442847852,\n    \"landed_tips_99th_percentile\": 1473.8027959508604,\n    \"ema_landed_tips_50th_percentile\": 5342.365437537984\n  },\n  {\n    \"time\": \"2014-02-01T10:01:27.980Z\",\n    \"landed_tips_25th_percentile\": 8162.408388605212,\n    \"landed_tips_50th_percentile\": 2816.088343064832,\n    \"landed_tips_75th_percentile\": 3440.1181381758706,\n    \"landed_tips_95th_percentile\": 2532.6290128389896,\n    \"landed_tips_99th_percentile\": 7545.603870414179,\n    \"ema_landed_tips_50th_percentile\": 3064.120039277003\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://mainnet.block-engine.jito.wtf",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d429678f-ea3c-4be9-9a48-af48daa831e1",
+    "name": "Jito Block Engine JSON-RPC Bundles Tips API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "JSON-RPC API for the Jito Block Engine. The Block Engine accepts bundles and transactions from searchers, bots, and dApps and forwards them to Jito-Solana leader validators for atomic block inclusion. Bundles are ordered, atomic groups of up to five Solana transactions that must execute together — if any one fails the entire bundle reverts. A SOL tip to a designated tip account is required for bundles to be considered by leaders.\n\nContact Support:\n Name: Jito Labs",
+      "type": "text/plain"
+    }
+  }
+}

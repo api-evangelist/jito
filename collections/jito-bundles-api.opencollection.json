@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Jito Block Engine JSON-RPC Bundles API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bundles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Bundle Or Query Bundle State",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mainnet.block-engine.jito.wtf/api/v1/bundles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "JSON-RPC 2.0 endpoint that accepts the `sendBundle`, `getBundleStatuses`, `getInflightBundleStatuses`, `getTipAccounts`, and `getRandomTipAccount` methods. The `method` field in the request body selects which operation is invoked."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
