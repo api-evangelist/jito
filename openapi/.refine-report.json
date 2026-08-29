@@ -1,18 +1,25 @@
 {
   "provider": "jito",
   "sources": [
-    "jito-bundles-api-openapi.yml",
-    "jito-tips-api-openapi.yml",
-    "jito-transactions-api-openapi.yml"
+    "_original/jito-block-engine-openapi.yml",
+    "_original/jito-bundles-tip-floor-openapi.yml"
   ],
   "outputs": [
     "jito-bundles-api-openapi.yml",
-    "jito-tips-api-openapi.yml",
-    "jito-transactions-api-openapi.yml"
+    "jito-transactions-api-openapi.yml",
+    "jito-tips-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "jito-block-engine-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "jito-bundles-tip-floor-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "jito-bundles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jito-tips-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "jito-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Jito Block Engine JSON-RPC Bundles Transactions API
+  title: Jito Block Engine JSON-RPC Transactions API
   version: '1.0'
   description: JSON-RPC API for the Jito Block Engine. The Block Engine accepts bundles and transactions from searchers, bots, and dApps and forwards them to Jito-Solana leader validators for atomic block inclusion. Bundles are ordered, atomic groups of up to five Solana transactions that must execute together — if any one fails the entire bundle reverts. A SOL tip to a designated tip account is required for bundles to be considered by leaders.
   contact:

@@ -1,41 +1,17 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Jito Block Engine JSON-RPC Bundles Tips API
+  title: Jito Bundles Tip Floor Tips API
   version: '1.0'
-  description: JSON-RPC API for the Jito Block Engine. The Block Engine accepts bundles and transactions from searchers, bots, and dApps and forwards them to Jito-Solana leader validators for atomic block inclusion. Bundles are ordered, atomic groups of up to five Solana transactions that must execute together — if any one fails the entire bundle reverts. A SOL tip to a designated tip account is required for bundles to be considered by leaders.
+  description: Public REST endpoint that returns recent tip pricing data used by searchers to size the SOL tip attached to a bundle. Pairs with the WebSocket tip stream (`wss://bundles.jito.wtf/api/v1/bundles/tip_stream`) for real-time tip percentile updates.
   contact:
     name: Jito Labs
     url: https://www.jito.network
   license:
     name: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  x-mev: true
-  x-network: solana
 servers:
-- url: https://mainnet.block-engine.jito.wtf
-  description: Mainnet global
-- url: https://amsterdam.mainnet.block-engine.jito.wtf
-  description: Mainnet Amsterdam
-- url: https://dublin.mainnet.block-engine.jito.wtf
-  description: Mainnet Dublin
-- url: https://frankfurt.mainnet.block-engine.jito.wtf
-  description: Mainnet Frankfurt
-- url: https://london.mainnet.block-engine.jito.wtf
-  description: Mainnet London
-- url: https://ny.mainnet.block-engine.jito.wtf
-  description: Mainnet New York
-- url: https://slc.mainnet.block-engine.jito.wtf
-  description: Mainnet Salt Lake City
-- url: https://singapore.mainnet.block-engine.jito.wtf
-  description: Mainnet Singapore
-- url: https://tokyo.mainnet.block-engine.jito.wtf
-  description: Mainnet Tokyo
-- url: https://testnet.block-engine.jito.wtf
-  description: Testnet global
-- url: https://dallas.testnet.block-engine.jito.wtf
-  description: Testnet Dallas
-- url: https://ny.testnet.block-engine.jito.wtf
-  description: Testnet New York
+- url: https://bundles.jito.wtf
+  description: Tip pricing service.
 tags:
 - name: Tips
   description: Bundle tip pricing data.

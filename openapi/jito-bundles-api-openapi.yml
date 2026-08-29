@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Jito Block Engine JSON-RPC Bundles API
   version: '1.0'
@@ -86,17 +86,21 @@ components:
           description: Tip account public keys.
           items:
             type: string
-    GetRandomTipAccountResponse:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-        id:
-          type: integer
-        result:
-          type: string
-          description: Single randomly selected tip account public key.
-    GetInflightBundleStatusesResponse:
+    GetBundleStatusesRequest:
+      allOf:
+      - $ref: '#/components/schemas/JsonRpcEnvelope'
+      - type: object
+        properties:
+          method:
+            const: getBundleStatuses
+          params:
+            type: array
+            items:
+              type: array
+              maxItems: 5
+              items:
+                type: string
+    GetBundleStatusesResponse:
       type: object
       properties:
         jsonrpc:
@@ -114,7 +118,100 @@ components:
             value:
               type: array
               items:
-                $ref: '#/components/schemas/InflightBundleStatus'
+                $ref: '#/components/schemas/BundleStatus'
+    GetRandomTipAccountRequest:
+      allOf:
+      - $ref: '#/components/schemas/JsonRpcEnvelope'
+      - type: object
+        properties:
+          method:
+            const: getRandomTipAccount
+    BundleStatus:
+      type: object
+      properties:
+        bundle_id:
+          type: string
+        transactions:
+          type: array
+          items:
+            type: string
+        slot:
+          type: integer
+        confirmationStatus:
+          type: string
+          enum:
+          - processed
+          - confirmed
+          - finalized
+        err:
+          nullable: true
+          type: object
+    GetTipAccountsRequest:
+      allOf:
+      - $ref: '#/components/schemas/JsonRpcEnvelope'
+      - type: object
+        properties:
+          method:
+            const: getTipAccounts
+          params:
+            type: array
+            maxItems: 0
+    SendBundleResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+        id:
+          type: integer
+        result:
+          type: string
+          description: Bundle ID — SHA-256 of the concatenated transaction signatures.
+    InflightBundleStatus:
+      type: object
+      properties:
+        bundle_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - Invalid
+          - Pending
+          - Failed
+          - Landed
+        landed_slot:
+          nullable: true
+          type: integer
+    GetInflightBundleStatusesRequest:
+      allOf:
+      - $ref: '#/components/schemas/JsonRpcEnvelope'
+      - type: object
+        properties:
+          method:
+            const: getInflightBundleStatuses
+          params:
+            type: array
+            items:
+              type: array
+              maxItems: 5
+              items:
+                type: string
+    JsonRpcEnvelope:
+      type: object
+      required:
+      - jsonrpc
+      - id
+      - method
+      properties:
+        jsonrpc:
+          type: string
+          enum:
+          - '2.0'
+        id:
+          oneOf:
+          - type: integer
+          - type: string
+        method:
+          type: string
     SendBundleRequest:
       allOf:
       - $ref: '#/components/schemas/JsonRpcEnvelope'
@@ -140,69 +237,7 @@ components:
                     enum:
                     - base58
                     - base64
-    GetBundleStatusesRequest:
-      allOf:
-      - $ref: '#/components/schemas/JsonRpcEnvelope'
-      - type: object
-        properties:
-          method:
-            const: getBundleStatuses
-          params:
-            type: array
-            items:
-              type: array
-              maxItems: 5
-              items:
-                type: string
-    JsonRpcEnvelope:
-      type: object
-      required:
-      - jsonrpc
-      - id
-      - method
-      properties:
-        jsonrpc:
-          type: string
-          enum:
-          - '2.0'
-        id:
-          oneOf:
-          - type: integer
-          - type: string
-        method:
-          type: string
-    GetInflightBundleStatusesRequest:
-      allOf:
-      - $ref: '#/components/schemas/JsonRpcEnvelope'
-      - type: object
-        properties:
-          method:
-            const: getInflightBundleStatuses
-          params:
-            type: array
-            items:
-              type: array
-              maxItems: 5
-              items:
-                type: string
-    GetRandomTipAccountRequest:
-      allOf:
-      - $ref: '#/components/schemas/JsonRpcEnvelope'
-      - type: object
-        properties:
-          method:
-            const: getRandomTipAccount
-    SendBundleResponse:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-        id:
-          type: integer
-        result:
-          type: string
-          description: Bundle ID — SHA-256 of the concatenated transaction signatures.
-    GetBundleStatusesResponse:
+    GetInflightBundleStatusesResponse:
       type: object
       properties:
         jsonrpc:
@@ -220,49 +255,14 @@ components:
             value:
               type: array
               items:
-                $ref: '#/components/schemas/BundleStatus'
-    InflightBundleStatus:
+                $ref: '#/components/schemas/InflightBundleStatus'
+    GetRandomTipAccountResponse:
       type: object
       properties:
-        bundle_id:
+        jsonrpc:
           type: string
-        status:
-          type: string
-          enum:
-          - Invalid
-          - Pending
-          - Failed
-          - Landed
-        landed_slot:
-          nullable: true
+        id:
           type: integer
-    GetTipAccountsRequest:
-      allOf:
-      - $ref: '#/components/schemas/JsonRpcEnvelope'
-      - type: object
-        properties:
-          method:
-            const: getTipAccounts
-          params:
-            type: array
-            maxItems: 0
-    BundleStatus:
-      type: object
-      properties:
-        bundle_id:
+        result:
           type: string
-        transactions:
-          type: array
-          items:
-            type: string
-        slot:
-          type: integer
-        confirmationStatus:
-          type: string
-          enum:
-          - processed
-          - confirmed
-          - finalized
-        err:
-          nullable: true
-          type: object
+          description: Single randomly selected tip account public key.
