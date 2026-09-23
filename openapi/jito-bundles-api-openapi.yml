@@ -74,7 +74,7 @@ paths:
           description: Rate limited.
 components:
   schemas:
-    GetTipAccountsResponse:
+    SendBundleResponse:
       type: object
       properties:
         jsonrpc:
@@ -82,50 +82,8 @@ components:
         id:
           type: integer
         result:
-          type: array
-          description: Tip account public keys.
-          items:
-            type: string
-    GetBundleStatusesRequest:
-      allOf:
-      - $ref: '#/components/schemas/JsonRpcEnvelope'
-      - type: object
-        properties:
-          method:
-            const: getBundleStatuses
-          params:
-            type: array
-            items:
-              type: array
-              maxItems: 5
-              items:
-                type: string
-    GetBundleStatusesResponse:
-      type: object
-      properties:
-        jsonrpc:
           type: string
-        id:
-          type: integer
-        result:
-          type: object
-          properties:
-            context:
-              type: object
-              properties:
-                slot:
-                  type: integer
-            value:
-              type: array
-              items:
-                $ref: '#/components/schemas/BundleStatus'
-    GetRandomTipAccountRequest:
-      allOf:
-      - $ref: '#/components/schemas/JsonRpcEnvelope'
-      - type: object
-        properties:
-          method:
-            const: getRandomTipAccount
+          description: Bundle ID — SHA-256 of the concatenated transaction signatures.
     BundleStatus:
       type: object
       properties:
@@ -146,17 +104,7 @@ components:
         err:
           nullable: true
           type: object
-    GetTipAccountsRequest:
-      allOf:
-      - $ref: '#/components/schemas/JsonRpcEnvelope'
-      - type: object
-        properties:
-          method:
-            const: getTipAccounts
-          params:
-            type: array
-            maxItems: 0
-    SendBundleResponse:
+    GetInflightBundleStatusesResponse:
       type: object
       properties:
         jsonrpc:
@@ -164,23 +112,17 @@ components:
         id:
           type: integer
         result:
-          type: string
-          description: Bundle ID — SHA-256 of the concatenated transaction signatures.
-    InflightBundleStatus:
-      type: object
-      properties:
-        bundle_id:
-          type: string
-        status:
-          type: string
-          enum:
-          - Invalid
-          - Pending
-          - Failed
-          - Landed
-        landed_slot:
-          nullable: true
-          type: integer
+          type: object
+          properties:
+            context:
+              type: object
+              properties:
+                slot:
+                  type: integer
+            value:
+              type: array
+              items:
+                $ref: '#/components/schemas/InflightBundleStatus'
     GetInflightBundleStatusesRequest:
       allOf:
       - $ref: '#/components/schemas/JsonRpcEnvelope'
@@ -195,6 +137,16 @@ components:
               maxItems: 5
               items:
                 type: string
+    GetTipAccountsRequest:
+      allOf:
+      - $ref: '#/components/schemas/JsonRpcEnvelope'
+      - type: object
+        properties:
+          method:
+            const: getTipAccounts
+          params:
+            type: array
+            maxItems: 0
     JsonRpcEnvelope:
       type: object
       required:
@@ -212,6 +164,83 @@ components:
           - type: string
         method:
           type: string
+    GetRandomTipAccountResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+        id:
+          type: integer
+        result:
+          type: string
+          description: Single randomly selected tip account public key.
+    GetBundleStatusesResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+        id:
+          type: integer
+        result:
+          type: object
+          properties:
+            context:
+              type: object
+              properties:
+                slot:
+                  type: integer
+            value:
+              type: array
+              items:
+                $ref: '#/components/schemas/BundleStatus'
+    GetTipAccountsResponse:
+      type: object
+      properties:
+        jsonrpc:
+          type: string
+        id:
+          type: integer
+        result:
+          type: array
+          description: Tip account public keys.
+          items:
+            type: string
+    GetRandomTipAccountRequest:
+      allOf:
+      - $ref: '#/components/schemas/JsonRpcEnvelope'
+      - type: object
+        properties:
+          method:
+            const: getRandomTipAccount
+    GetBundleStatusesRequest:
+      allOf:
+      - $ref: '#/components/schemas/JsonRpcEnvelope'
+      - type: object
+        properties:
+          method:
+            const: getBundleStatuses
+          params:
+            type: array
+            items:
+              type: array
+              maxItems: 5
+              items:
+                type: string
+    InflightBundleStatus:
+      type: object
+      properties:
+        bundle_id:
+          type: string
+        status:
+          type: string
+          enum:
+          - Invalid
+          - Pending
+          - Failed
+          - Landed
+        landed_slot:
+          nullable: true
+          type: integer
     SendBundleRequest:
       allOf:
       - $ref: '#/components/schemas/JsonRpcEnvelope'
@@ -237,32 +266,3 @@ components:
                     enum:
                     - base58
                     - base64
-    GetInflightBundleStatusesResponse:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-        id:
-          type: integer
-        result:
-          type: object
-          properties:
-            context:
-              type: object
-              properties:
-                slot:
-                  type: integer
-            value:
-              type: array
-              items:
-                $ref: '#/components/schemas/InflightBundleStatus'
-    GetRandomTipAccountResponse:
-      type: object
-      properties:
-        jsonrpc:
-          type: string
-        id:
-          type: integer
-        result:
-          type: string
-          description: Single randomly selected tip account public key.
