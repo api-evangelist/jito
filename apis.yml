@@ -1,5 +1,8 @@
 aid: jito
 url: https://raw.githubusercontent.com/api-evangelist/jito/refs/heads/main/apis.yml
+x-docs-platform: readthedocs
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-10-03
 apis:
 - aid: jito:jito-streaming
   name: Jito Streaming Surfaces
