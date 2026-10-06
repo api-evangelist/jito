@@ -311,6 +311,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/jito.png
 access: 3rd-Party
 common:
+- url: https://www.jito.wtf/blog/
+  type: Blog
 - type: Website
   url: https://jito.wtf
 - type: AgenticAccess
@@ -512,7 +514,7 @@ common:
 - type: About
   url: https://gov.jito.network
 created: '2026-05-24T00:00:00.000Z'
-modified: '2026-09-16'
+modified: '2026-10-06'
 position: Producing
 description: Jito Labs is the Solana MEV infrastructure company behind Jito-Solana, the MEV-enabled validator
   client that runs on the majority of Solana mainnet stake, and the Jito Block Engine, an off-chain auction
